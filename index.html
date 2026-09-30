@@ -1,0 +1,30 @@
+<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Descubra Cotia - Pontos Culturais e Turísticos</title><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="style.css"></head><body>
+<header class="hero"><h1>Cultura &amp; Turismo em Cotia</h1><p>Explore os principais pontos culturais e turísticos da região</p></header>
+<main class="container">
+<section class="toolbar" aria-label="Buscar e filtrar">
+<input type="search" id="q" placeholder="Busque por nome, local ou atividade (ex.: templo, trilha)" aria-label="Buscar pontos culturais">
+<div class="chips" role="group" aria-label="Filtrar por categoria"><button class="chip" data-filter="all" aria-pressed="true">Todos</button><button class="chip" data-filter="natureza" aria-pressed="false">Natureza</button><button class="chip" data-filter="historia" aria-pressed="false">História</button><button class="chip" data-filter="espiritual" aria-pressed="false">Espiritual</button></div>
+<p class="count" id="count" aria-live="polite"></p></section>
+<section class="grid" id="grid"><a href="templo-zu-lai.html" class="card" data-cat="espiritual" data-keywords="Templo Zu Lai Granja Viana budista meditação jardins Espiritual">
+<div class="card-media"><img src="https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&amp;fit=crop&amp;w=1000&amp;q=80" alt="" loading="lazy"><span class="badge espiritual">Espiritual</span></div>
+<div class="card-body"><h3 class="card-title">Templo Zu Lai</h3><p class="card-loc">📍 Granja Viana</p><p class="card-desc">Templo budista Fo Guang Shan de arquitetura chinesa, com jardins orientais, meditação e culinária vegetariana.</p><span class="btn">Ver detalhes <span aria-hidden="true">→</span></span></div></a><a href="parque-cemucam.html" class="card" data-cat="natureza" data-keywords="Parque Cemucam Jardim Passárgada trilha ciclovia piquenique lazer Natureza">
+<div class="card-media"><img src="https://images.unsplash.com/photo-1519331379826-f10be5486c6f?auto=format&amp;fit=crop&amp;w=1000&amp;q=80" alt="" loading="lazy"><span class="badge natureza">Natureza</span></div>
+<div class="card-body"><h3 class="card-title">Parque Cemucam</h3><p class="card-loc">📍 Jardim Passárgada</p><p class="card-desc">Único parque da Prefeitura de São Paulo fora da capital: lagos, bosques, trilhas e ciclovia de 8 km.</p><span class="btn">Ver detalhes <span aria-hidden="true">→</span></span></div></a><a href="sitio-mandu.html" class="card" data-cat="historia" data-keywords="Sítio do Mandu Zona rural · Morro Grande bandeirante taipa de pilão patrimônio iphan História">
+<div class="card-media"><img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&amp;fit=crop&amp;w=1000&amp;q=80" alt="" loading="lazy"><span class="badge historia">História</span></div>
+<div class="card-body"><h3 class="card-title">Sítio do Mandu</h3><p class="card-loc">📍 Zona rural · Morro Grande</p><p class="card-desc">Habitação bandeirista do século XVIII em taipa de pilão e pau-a-pique, tombada pelo IPHAN.</p><span class="btn">Ver detalhes <span aria-hidden="true">→</span></span></div></a><a href="arautos.html" class="card" data-cat="espiritual" data-keywords="Basílica N. Sra. do Rosário de Fátima Divisa Itapecerica–Cotia arautos do evangelho neogótica igreja Espiritual">
+<div class="card-media"><img src="https://images.unsplash.com/photo-1543783207-ec64e4d95325?auto=format&amp;fit=crop&amp;w=1000&amp;q=80" alt="" loading="lazy"><span class="badge espiritual">Espiritual</span></div>
+<div class="card-body"><h3 class="card-title">Basílica N. Sra. do Rosário de Fátima</h3><p class="card-loc">📍 Divisa Itapecerica–Cotia</p><p class="card-desc">Santuário de arquitetura neogótica gerido pelos Arautos do Evangelho, com vitrais e arte sacra.</p><span class="btn">Ver detalhes <span aria-hidden="true">→</span></span></div></a><a href="cachoeira.html" class="card" data-cat="natureza" data-keywords="Cachoeira da Graça Portal do Santa Paula trilha mata atlântica ecoturismo banho Natureza">
+<div class="card-media"><img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1c/ab/65/43/20210221-091511-largejpg.jpg?w=700&amp;h=400&amp;s=1" alt="" loading="lazy"><span class="badge natureza">Natureza</span></div>
+<div class="card-body"><h3 class="card-title">Cachoeira da Graça</h3><p class="card-loc">📍 Portal do Santa Paula</p><p class="card-desc">Refúgio de águas cristalinas com trilhas ecológicas de nível leve a moderado na Mata Atlântica.</p><span class="btn">Ver detalhes <span aria-hidden="true">→</span></span></div></a></section>
+<p class="empty" id="empty" hidden>Nenhum ponto encontrado. Tente outra palavra ou escolha “Todos”.</p>
+</main><footer>&copy; 2026 Guia Cultural de Cotia</footer>
+<script>
+const norm=t=>t.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
+const cards=[...document.querySelectorAll('.card')],chips=[...document.querySelectorAll('.chip')];
+let cat='all';
+function apply(){const q=norm(document.getElementById('q').value.trim());let n=0;
+cards.forEach(c=>{const ok=(cat==='all'||c.dataset.cat===cat)&&norm(c.dataset.keywords+' '+c.textContent).includes(q);c.hidden=!ok;if(ok)n++});
+document.getElementById('empty').hidden=n>0;document.getElementById('count').textContent=n+(n===1?' ponto encontrado':' pontos encontrados')}
+document.getElementById('q').addEventListener('input',apply);
+chips.forEach(b=>b.addEventListener('click',()=>{cat=b.dataset.filter;chips.forEach(x=>x.setAttribute('aria-pressed',x===b));apply()}));apply();
+</script></body></html>
